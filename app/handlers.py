@@ -19,13 +19,13 @@ class States(StatesGroup):
 
 @router.message(CommandStart())
 async def start(message: Message):
-    await message.answer("Добро пожаловать в QRcode Generator. Чтобы посмотреть список команд, напишите /help")
+    await message.answer("Welcome to QRcode Generator. To view the list of commands, write /help")
 
 @router.message(Command('help'))
 async def help(message: Message):
-    await message.answer('''/start - запуск бота
-/help - список команд бота
-/generate - сгенерировать qr код''')
+    await message.answer('''/start - launch the bot
+/help - list of bot commands
+/generate - generate qr code''')
 
 
 @router.message(Command('generate'))
