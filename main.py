@@ -3,7 +3,7 @@ import asyncio
 from aiogram import Bot, Dispatcher
 from app.handlers import router
 
-bot = Bot(token='Your token here')
+bot = Bot(token="Your token")
 dp = Dispatcher()
 
 async def main():
