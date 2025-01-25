@@ -3,6 +3,7 @@ import os
 
 from aiogram import Bot, Dispatcher
 from app.handlers import router
+
 from dotenv import load_dotenv
 
 load_dotenv()
