@@ -2,7 +2,7 @@ import qrcode
 
 def qr_generate(border, fill_color, back_color, link):
     qr = qrcode.QRCode(
-        version=5,
+        version=3,
         error_correction=qrcode.constants.ERROR_CORRECT_L,
         box_size=10,
         border=border,
