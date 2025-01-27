@@ -40,7 +40,7 @@ async def get_fill_color(message: Message, state: FSMContext):
         await state.set_state(States.back_color)
         await message.answer('Enter a color of background for your qrcode')
         await state.update_data(fill_color=message.text)
-    elif message.text not in colors:
+    elif message.text.lower() not in colors:
         await message.answer(
             "This color is not in my database, pls try to enter your color in rgb format")
     else:
@@ -54,7 +54,7 @@ async def get_back_color(message: Message, state: FSMContext):
         await state.set_state(States.border)
         await message.answer('Enter a width of border for your qrcode (example: 4)')
         await state.update_data(back_color=message.text)
-    elif message.text not in colors:
+    elif message.text.lower() not in colors:
         await message.answer(
             "This color is not in my database, pls try to enter your color in rgb format")
     else:
