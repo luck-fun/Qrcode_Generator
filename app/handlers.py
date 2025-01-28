@@ -16,7 +16,8 @@ class States(StatesGroup):
     back_color = State()
     border = State()
     link = State()
-
+    version = State()
+    
 @router.message(CommandStart())
 async def start(message: Message):
     await message.answer("Welcome to QRcode Generator. To view the list of commands, write /help")
