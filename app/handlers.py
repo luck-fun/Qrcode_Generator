@@ -7,7 +7,7 @@ from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.context import FSMContext
 
 from qr_code.qrcode_generator import qr_generate
-from data.colors_data import colors, max_value_of_border, values_of_ord
+from data.colors_data import colors, max_value_of_border, values_of_ord, max_value_of_version
 
 router = Router()
 
@@ -65,7 +65,6 @@ async def get_back_color(message: Message, state: FSMContext):
 
 @router.message(States.border)
 async def get_border(message: Message, state: FSMContext):
-
     for i in message.text:
         if ord(i) not in values_of_ord:
             await message.answer("You have entered incorrect symbol")
@@ -74,10 +73,22 @@ async def get_border(message: Message, state: FSMContext):
         await message.answer("Max value of border is 10")
     else:
         await state.update_data(border=message.text)
+        await state.set_state(States.version)
+        await message.answer("Enter a version for your qrcode")
+
+@router.message(States.version)
+async def get_version(message: Message, state: FSMContext):
+    for i in message.text:
+        if ord(i) not in values_of_ord:
+            await message.answer("You have entered incorrect symbol")
+            break
+    if int(message.text) > max_value_of_version:
+        await message.answer("Max value of version is 40")
+    else:
+        await state.update_data(version=message.text)
         await state.set_state(States.link)
         await message.answer("Enter a link for your qrcode")
-
-
+    
 @router.message(States.link)
 async def get_link(message: Message, state: FSMContext):
     await state.update_data(link=message.text)
