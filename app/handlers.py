@@ -95,7 +95,7 @@ async def get_link(message: Message, state: FSMContext):
     data = await state.get_data()
     await message.answer("Generation...")
     await asyncio.sleep(4)
-    qr_generate(data["border"], data["fill_color"], data["back_color"], data["link"])
+    qr_generate(data["border"], data["fill_color"], data["back_color"], data["link"], data['version'])
     qrc = FSInputFile('qr_code.png')
     await message.answer("Your qrcode has been succefully generated")
     await message.answer_photo(qrc)
