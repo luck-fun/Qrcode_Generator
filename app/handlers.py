@@ -88,6 +88,7 @@ async def get_version(message: Message, state: FSMContext):
         await state.update_data(version=message.text)
         await state.set_state(States.link)
         await message.answer("Enter a link for your qrcode")
+        
 @router.message(States.link)
 async def get_link(message: Message, state: FSMContext):
     await state.update_data(link=message.text)
