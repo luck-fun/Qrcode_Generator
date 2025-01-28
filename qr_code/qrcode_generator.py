@@ -1,8 +1,8 @@
 import qrcode
 
-def qr_generate(border, fill_color, back_color, link):
+def qr_generate(border, fill_color, back_color, link, version):
     qr = qrcode.QRCode(
-        version=3,
+        version=version,
         error_correction=qrcode.constants.ERROR_CORRECT_L,
         box_size=10,
         border=border,
