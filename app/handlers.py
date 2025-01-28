@@ -66,12 +66,12 @@ async def get_back_color(message: Message, state: FSMContext):
 @router.message(States.border)
 async def get_border(message: Message, state: FSMContext):
     for i in message.text:
-        if ord(i) not in values_of_ord:
+        if ord(i) not in values_of_ord and message.text[0] != '-':
             await message.answer("You have entered incorrect symbol")
             break
-    if int(message.text) > max_value_of_border:
-        await message.answer("Max value of border is 10")
-    else:
+    if int(message.text) > max_value_of_border or int(message.text) <= 0:
+        await message.answer("Max value of border is 10 and min is 1")
+    elif int(message.text) > 0:
         await state.update_data(border=message.text)
         await state.set_state(States.version)
         await message.answer("Enter a version for your qrcode")
@@ -79,16 +79,15 @@ async def get_border(message: Message, state: FSMContext):
 @router.message(States.version)
 async def get_version(message: Message, state: FSMContext):
     for i in message.text:
-        if ord(i) not in values_of_ord:
+        if ord(i) not in values_of_ord and message.text[0] != '-':
             await message.answer("You have entered incorrect symbol")
             break
-    if int(message.text) > max_value_of_version:
-        await message.answer("Max value of version is 40")
-    else:
+    if int(message.text) > max_value_of_version or int(message.text) <= 0:
+        await message.answer("Max value of version is 40 and min is 1")
+    elif int(message.text) > 0:
         await state.update_data(version=message.text)
         await state.set_state(States.link)
         await message.answer("Enter a link for your qrcode")
-    
 @router.message(States.link)
 async def get_link(message: Message, state: FSMContext):
     await state.update_data(link=message.text)
